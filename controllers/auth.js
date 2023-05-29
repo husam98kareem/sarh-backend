@@ -6,20 +6,8 @@ const register = (req, res) => {
     const sql = "INSERT INTO employees (`employeeId`,`surname`,`firstName`,`middleName`,`lastName`,`dateOfBirth`,`gender`,`bloodGroup`,`company`,`dateOfStart`,`img`,`streetAddress`,`zipCode`,`country`,`city`,`mobile`,`email`) VALUES (?)";
     const values = [req.body.employeeId, req.body.surname, req.body.firstName, req.body.middleName, req.body.lastName, req.body.dateOfBirth, req.body.gender, req.body.bloodGroup, req.body.company, req.body.dateOfStart, req.body.img, req.body.streetAddress, req.body.zipCode, req.body.country, req.body.city, req.body.mobile, req.body.email]
     con.query(sql, [values], (err, data) => {
-        // if (err) return res.status(500).json(err);
-        // if (data.length) return res.status(409).json("User already exists!");
-        // const salt = bcrypt.genSaltSync(10);
-        // const hash = bcrypt.hashSync(req.body.password, salt);
-        // const sql = "INSERT INTO users(`username`,`name`,`password`) VALUES (?)";
-        // const values = [req.body.username, req.body.name, ];
-        // con.query(sql, [values], (err, result) => {
         if (err) return res.status(500).json(err);
-        return res.status(200).json("inserted successfully"
-            // { id: result.insertId, name: req.body.name, username: req.body.username, token: generateToken(result.insertId, req.body.username) 
-            // 
-            // }
-        );
-        // });
+        return res.status(200).json("inserted successfully");
     })
 }
 

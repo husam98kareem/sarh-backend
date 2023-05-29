@@ -37,8 +37,7 @@ const upload = multer({
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-    // console.log(req.file);
-    const fileUrl = `http://localhost:4000/files/${req.file.filename}`;
+    const fileUrl = `http://192.168.88.144:4000/files/${req.file.filename}`;
     res.send(fileUrl);
 });
 
