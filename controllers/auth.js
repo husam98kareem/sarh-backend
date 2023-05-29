@@ -26,20 +26,24 @@ const register = (req, res) => {
 const login = (req, res) => {
     username = req.body.username
         // check user
-    sql = "SELECT * FROM users WHERE username = ?"
+    sql = "SELECT * FROM employees WHERE username = ?"
     con.query(sql, [username], (err, data) => {
         if (err) return res.status(500).json(err);
         if (data.length === 0) return res.status(404).json("User not found!");
 
         //Check password
-        const isPasswordCorrect = bcrypt.compareSync(
-            req.body.password,
-            data[0].password
-        );
+        const isPasswordCorrect = req.body.password === data[0].password;
         if (!isPasswordCorrect)
             return res.status(400).json("Wrong username or password!");
         var data = JSON.parse(JSON.stringify(data[0]))
-        res.status(200).json({ id: data.id, name: data.name, username: data.username, isSectionManager: data.isSectionManager, isManager: data.isManager, token: generateToken(data.id, data.username) })
+        res.status(200).json({
+            id: data.id,
+            name: data.name,
+            username: data.username,
+            isSectionManager: data.isSectionManager,
+            isManager: data.isManager,
+            //  token: generateToken(data.id, data.username)
+        })
     })
 }
 
