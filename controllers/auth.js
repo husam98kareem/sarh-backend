@@ -18,7 +18,6 @@ const login = (req, res) => {
     con.query(sql, [username], (err, data) => {
         if (err) return res.status(500).json(err);
         if (data.length === 0) return res.status(404).json("User not found!");
-
         //Check password
         const isPasswordCorrect = req.body.password === data[0].password;
         if (!isPasswordCorrect)
@@ -28,10 +27,22 @@ const login = (req, res) => {
             id: data.id,
             name: data.name,
             username: data.username,
+            department: data.department,
             isSectionManager: data.isSectionManager,
             isManager: data.isManager,
             //  token: generateToken(data.id, data.username)
         })
+    })
+}
+
+
+const getEmployeeById = (req, res) => {
+    const id = req.params.id;
+    const sql = "SELECT * FROM employees WHERE employeeId=?"
+    con.query(sql, [id], (err, data) => {
+        if (err) return res.status(500).json(err);
+        if (data.length === 0) return res.status(404).json("User not found!");
+        res.status(200).send("success!");
     })
 }
 
@@ -43,5 +54,6 @@ const generateToken = (id, username) => {
 
 module.exports = {
     register,
-    login
+    login,
+    getEmployeeById
 }

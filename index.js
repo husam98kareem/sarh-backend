@@ -7,6 +7,8 @@ const con = require("./db")
 const authRoutes = require("./routes/auth")
 const ordersRoutes = require("./routes/orders")
 const humanRoutes = require("./routes/humanResources")
+const receptionRoutes = require("./routes/reception/receptionRoutes")
+
 
 const port = 4000
 
@@ -49,5 +51,7 @@ app.get('/files/:filename', (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/human", humanRoutes);
+app.use("/api/reception", receptionRoutes);
+
 
 app.listen(port, () => { console.log(`app running on ${port}`) })

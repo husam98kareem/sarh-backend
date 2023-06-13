@@ -7,6 +7,11 @@ const createVacation = (req, res) => {
         return res.status(200).json("inserted order");
     });
 }
+
+
+
+
+
 const getAll = (req, res) => {
     con.query("SELECT * FROM human", (err, result) => {
         if (err) throw err
@@ -67,5 +72,6 @@ module.exports = {
     updateVacationByManager,
     updateVacationByHr,
     getVacation,
-    getByDate
+    getByDate,
+
 }
